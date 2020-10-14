@@ -1,0 +1,20 @@
+[Unit]
+Description="Stolon Sentinel - Discover and Monitor keepers service"
+Documentation=https://github.com/sorintlab/stolon/blob/master/doc/README.md
+Requires=consul.service
+After=consul.service
+
+[Service]
+EnvironmentFile=/etc/sysconfig/stolon
+
+Type=simple
+User=postgres
+Group=postgres
+
+PermissionsStartOnly=true
+ExecStart=/usr/bin/stolon-sentinel --cluster-name ${CLUSTER_NAME} --store-backend ${STORE_BACKEND}
+Restart=on-failure
+LimitNOFILE=65536
+
+[Install]
+WantedBy=consul.service

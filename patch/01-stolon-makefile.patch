@@ -1,0 +1,25 @@
+diff --git a/Makefile b/Makefile
+index 84dc910..96ecd30 100644
+--- a/Makefile
++++ b/Makefile
+@@ -36,6 +36,20 @@ proxy:
+ stolonctl:
+        CGO_ENABLED=0 GO111MODULE=on go build -ldflags $(LD_FLAGS) -o $(PROJDIR)/bin/stolonctl $(REPO_PATH)/cmd/stolonctl
+
++.PHONY: install
++install:
++       install -m 755 bin/stolonctl /usr/bin/stolonctl
++       install -m 755 bin/stolon-keeper /usr/bin/stolon-keeper
++       install -m 755 bin/stolon-sentinel /usr/bin/stolon-sentinel
++       install -m 755 bin/stolon-proxy /usr/bin/stolon-proxy
++
++.PHONY: uninstall
++uninstall:
++       rm -rf /usr/bin/stolonctl
++       rm -rf /usr/bin/stolon-keeper
++       rm -rf /usr/bin/stolon-sentinel
++       rm -rf /usr/bin/stolon-proxy
++
+ .PHONY: docker
+ docker:
+        if [ -z $${PGVERSION} ]; then echo 'PGVERSION is undefined'; exit 1; fi; \

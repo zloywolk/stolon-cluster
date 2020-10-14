@@ -1,0 +1,14 @@
+# Global environment
+CLUSTER_NAME=dev-cluster
+STORE_BACKEND=consul
+KEEPER_UID=pdb01
+
+# Keeper environment
+STKEEPER_DATA_DIR=/var/lib/pgsql/11/data/pdb01
+STKEEPER_PG_SU_PASSWORD=postgres1
+STKEEPER_PG_REPL_USERNAME=repluser
+STKEEPER_PG_REPL_PASSWORD=repluser1
+STKEEPER_PG_LISTEN_ADDRESS=127.0.0.1
+
+# Proxy environment
+STPROXY_PORT=25432
