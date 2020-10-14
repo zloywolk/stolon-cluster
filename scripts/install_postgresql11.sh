@@ -8,10 +8,12 @@ dnf -y install postgresql11-server postgresql11
 echo "Install PostGIS"
 dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 dnf install -y dnf-plugins-core 
-dnf config-manager --set-enabled PowerTools
+dnf install 'dnf-command(versionlock)' -y
+dnf config-manager --set-disabled pgdg10 pgdg12 pgdg13 pgdg95 pgdg96
 dnf config-manager --set-enabled PowerTools
 dnf module disable postgresql
 dnf install -y postgis30_11
-dnf downgrade gdal31-libs.x86_64 3.1.3-1.rhel8
-dnf install 'dnf-command(versionlock)'
-dnf versionlock add gdal31-libs.x86_64
+dnf downgrade gdal31-libs.x86_64 3.1.3-1.rhel8 -y
+dnf versionlock add gdal31-libs.x86_64 -y
+dnf clean all
+
